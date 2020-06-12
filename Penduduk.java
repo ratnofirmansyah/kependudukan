@@ -1,4 +1,5 @@
 public class Penduduk {
+    // enkapsulasi
     protected String nama;
     protected int umur;
     protected String jenis_kelamin;
