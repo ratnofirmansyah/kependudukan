@@ -2,17 +2,42 @@ import java.util.Scanner;
 
 class OlahData { // class ini yang akan di wariskan nantinya.
     public static Scanner input = new Scanner(System.in);
-    public static void input_data(){
+    public static void input_data(Desa desa_penduduk, Penduduk dataPenduduk[]){
+        // input desa melalui class desa
         System.out.print("Silakan Masukan Nama Desa : ");
-        String nama_desa = input.next();
-        Desa desa_penduduk = new Desa(nama_desa);
-        Penduduk penduduk_1 = new Penduduk("Firman", 22, "Laki Laki", "Belum Kawin");
-        Penduduk penduduk_2 = new Penduduk("Fahrul", 22, "Laki Laki", "Kawin Belum");
-        Penduduk penduduk_3 = new Penduduk("Rangga", 23, "Laki Laki", "Mau Kawin");
+        String desa = input.next();
+        desa_penduduk.setNamaDesa(desa);
 
-        penduduk_1.CetakHeaderPenduduk();
-        penduduk_1.CetakPenduduk();
-        penduduk_2.CetakPenduduk();
-        penduduk_3.CetakPenduduk();
+        // input penduduk melalui class penduduk
+        int totalPenduduk = 0;
+        while (totalPenduduk<2) {
+            System.out.print("\nNama : ");
+            String nama = input.next();
+            System.out.print("Status Kawin : ");
+            String kawin = input.next();
+            System.out.print("Jenis Kelamin : ");
+            String jenkel = input.next();
+            input.nextLine();
+            System.out.print("Umur : ");
+            int umur = input.nextInt();
+            System.out.println("Data Ke-"+(totalPenduduk+1)+" Disimpan!\n");
+
+            dataPenduduk[totalPenduduk] = new Penduduk(nama, umur, jenkel, kawin);
+            System.out.print("Input Lagi? [Yes=1/ No=0] : ");
+            int inputLagi = input.nextInt();
+            if (inputLagi==1) {
+                totalPenduduk++;
+            }else{
+                totalPenduduk=2;
+            }
+        }
+    }
+
+    public static void cetak_data(Desa desa_penduduk, Penduduk dataPenduduk[]){
+        desa_penduduk.tampilDesa();
+        dataPenduduk[0].CetakHeaderPenduduk();
+        for (int i = 0; i < dataPenduduk.length; i++){
+            dataPenduduk[i].CetakPenduduk();
+        }
     }
 }
